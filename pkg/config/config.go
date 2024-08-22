@@ -36,6 +36,14 @@ type ExporterConfigSpec struct {
 	AdditionalVariables  map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
 }
 
+type ScraperConfig struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   ScraperConfigSpec   `json:"spec,omitempty"`
+	Status ScraperConfigStatus `json:"status,omitempty"`
+}
+
 type ScraperConfigSpec struct {
 	TableName            string `yaml:"tableName" json:"tableName"`
 	PollingIntervalHours int    `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
