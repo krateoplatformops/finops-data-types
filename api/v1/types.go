@@ -7,6 +7,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+type ExporterScraperConfig struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   ExporterScraperConfigSpec   `json:"spec,omitempty"`
+	Status ExporterScraperConfigStatus `json:"status,omitempty"`
+}
+
 type ExporterScraperConfigSpec struct {
 	// +optional
 	ExporterConfig ExporterConfigSpec `yaml:"exporterConfig" json:"exporterConfig"`
