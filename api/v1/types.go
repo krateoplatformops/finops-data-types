@@ -66,6 +66,20 @@ type ScraperConfigStatus struct {
 	ConfigMap     corev1.ObjectReference `json:"configMaps,omitempty"`
 }
 
+type FocusConfig struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   FocusConfigSpec   `json:"spec,omitempty"`
+	Status FocusConfigStatus `json:"status,omitempty"`
+}
+
+type FocusConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []FocusConfig `json:"items"`
+}
+
 // FocusConfigSpec defines the desired state of FocusConfig
 type FocusConfigSpec struct {
 	FocusSpec FocusSpec `yaml:"focusSpec" json:"focusSpec"`
