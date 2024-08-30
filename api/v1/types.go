@@ -133,8 +133,8 @@ type FocusSpec struct {
 	// +optional
 	ContractedUnitCost resource.Quantity `yaml:"contractedUnitCost" json:"contractedUnitCost"`
 	// +optional
-	EffectiveCost resource.Quantity `yaml:"effectiveCost" json:"effectiveCost"`
-	InvoiceIssuer string            `yaml:"invoiceIssuer" json:"invoiceIssuer"`
+	EffectiveCost     resource.Quantity `yaml:"effectiveCost" json:"effectiveCost"`
+	InvoiceIssuerName string            `yaml:"invoiceIssuerName" json:"invoiceIssuerName"`
 	// +optional
 	ListCost resource.Quantity `yaml:"listCost" json:"listCost"`
 	// +optional
@@ -147,9 +147,9 @@ type FocusSpec struct {
 	// +optional
 	PricingUnit string `yaml:"pricingUnit" json:"pricingUnit"`
 	// +optional
-	Provider string `yaml:"provider" json:"provider"`
+	ProviderName string `yaml:"providerName" json:"providerName"`
 	// +optional
-	Publisher string `yaml:"publisher" json:"publisher"`
+	PublisherName string `yaml:"publisherName" json:"publisherName"`
 	// +optional
 	RegionId string `yaml:"regionId" json:"regionId"`
 	// +optional
