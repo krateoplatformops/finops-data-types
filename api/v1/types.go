@@ -37,8 +37,9 @@ type ExporterConfigSpec struct {
 	// +kubebuilder:validation:Pattern=`^(\bcert-file\b)|(\bbearer-token\b)$`
 	AuthenticationMethod string `yaml:"authenticationMethod" json:"authenticationMethod"`
 	// +optional
-	BearerToken ObjectRef `yaml:"bearerToken" json:"bearerToken"`
+	BearerToken SecretKeySelector `yaml:"bearerToken" json:"bearerToken"`
 	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
+	// +kubebuilder:default=cost
 	// +optional
 	MetricType           string            `yaml:"metricType" json:"metricType"`
 	PollingIntervalHours int               `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
@@ -62,6 +63,8 @@ type ScraperConfigSpec struct {
 }
 
 type ScraperConfigStatus struct {
+	// +kubebuilder:default=cost
+	MetricType    string                 `yaml:"metricType" json:"metricType"`
 	ActiveScraper corev1.ObjectReference `json:"active,omitempty"`
 	ConfigMap     corev1.ObjectReference `json:"configMaps,omitempty"`
 }
@@ -185,4 +188,16 @@ type TagsType struct {
 type ObjectRef struct {
 	Name      string `json:"name" yaml:"name"`
 	Namespace string `json:"namespace" yaml:"namespace"`
+}
+
+// A SecretKeySelector is a reference to a secret key in an arbitrary namespace.
+type SecretKeySelector struct {
+	// Name of the referenced object.
+	Name string `json:"name"`
+
+	// Namespace of the referenced object.
+	Namespace string `json:"namespace"`
+
+	// The key to select.
+	Key string `json:"key"`
 }
