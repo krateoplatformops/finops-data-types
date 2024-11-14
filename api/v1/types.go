@@ -58,13 +58,14 @@ type ScraperConfigSpec struct {
 	TableName            string `yaml:"tableName" json:"tableName"`
 	PollingIntervalHours int    `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
 	// +optional
-	Url                      string    `yaml:"url" json:"url,omitempty"`
+	Url string `yaml:"url" json:"url,omitempty"`
+	// +kubebuilder:default=cost
+	// +optional
+	MetricType               string    `yaml:"metricType" json:"metricType"`
 	ScraperDatabaseConfigRef ObjectRef `yaml:"scraperDatabaseConfigRef" json:"scraperDatabaseConfigRef"`
 }
 
 type ScraperConfigStatus struct {
-	// +kubebuilder:default=cost
-	MetricType    string                 `yaml:"metricType" json:"metricType"`
 	ActiveScraper corev1.ObjectReference `json:"active,omitempty"`
 	ConfigMap     corev1.ObjectReference `json:"configMaps,omitempty"`
 }
