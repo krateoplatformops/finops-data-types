@@ -2,6 +2,7 @@
 package config
 
 import (
+	prv1 "github.com/krateoplatformops/provider-runtime/apis/common/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -23,9 +24,19 @@ type ExporterScraperConfigSpec struct {
 }
 
 type ExporterScraperConfigStatus struct {
+	prv1.ConditionedStatus `json:",inline"`
+
 	ActiveExporter corev1.ObjectReference `json:"active,omitempty"`
 	ConfigMap      corev1.ObjectReference `json:"configMaps,omitempty"`
 	Service        corev1.ObjectReference `json:"services,omitempty"`
+}
+
+func (mg *ExporterScraperConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+func (mg *ExporterScraperConfig) SetConditions(c ...prv1.Condition) {
+	mg.Status.SetConditions(c...)
 }
 
 type ExporterConfigSpec struct {
@@ -66,8 +77,17 @@ type ScraperConfigSpec struct {
 }
 
 type ScraperConfigStatus struct {
-	ActiveScraper corev1.ObjectReference `json:"active,omitempty"`
-	ConfigMap     corev1.ObjectReference `json:"configMaps,omitempty"`
+	prv1.ConditionedStatus `json:",inline"`
+	ActiveScraper          corev1.ObjectReference `json:"active,omitempty"`
+	ConfigMap              corev1.ObjectReference `json:"configMaps,omitempty"`
+}
+
+func (mg *ScraperConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+func (mg *ScraperConfig) SetConditions(c ...prv1.Condition) {
+	mg.Status.SetConditions(c...)
 }
 
 type FocusConfig struct {
@@ -93,7 +113,16 @@ type FocusConfigSpec struct {
 
 // FocusConfigStatus defines the observed state of FocusConfig
 type FocusConfigStatus struct {
-	GroupKey string `json:"groupKey,omitempty"`
+	prv1.ConditionedStatus `json:",inline"`
+	GroupKey               string `json:"groupKey,omitempty"`
+}
+
+func (mg *FocusConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+func (mg *FocusConfig) SetConditions(c ...prv1.Condition) {
+	mg.Status.SetConditions(c...)
 }
 
 type FocusSpec struct {
