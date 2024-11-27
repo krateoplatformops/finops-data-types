@@ -31,14 +31,6 @@ type ExporterScraperConfigStatus struct {
 	Service        corev1.ObjectReference `json:"services,omitempty"`
 }
 
-func (mg *ExporterScraperConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-func (mg *ExporterScraperConfig) SetConditions(c ...prv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
 type ExporterConfigSpec struct {
 	Provider ObjectRef `yaml:"provider" json:"provider"`
 	Url      string    `yaml:"url" json:"url"`
@@ -82,14 +74,6 @@ type ScraperConfigStatus struct {
 	ConfigMap              corev1.ObjectReference `json:"configMaps,omitempty"`
 }
 
-func (mg *ScraperConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-func (mg *ScraperConfig) SetConditions(c ...prv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
 type FocusConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -117,14 +101,6 @@ type FocusConfigStatus struct {
 	GroupKey               string `json:"groupKey,omitempty"`
 }
 
-func (mg *FocusConfig) GetCondition(ct prv1.ConditionType) prv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-func (mg *FocusConfig) SetConditions(c ...prv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
 type FocusSpec struct {
 	// +optional
 	AvailabilityZone string            `yaml:"availabilityZone" json:"availabilityZone"`
@@ -137,6 +113,11 @@ type FocusSpec struct {
 	BillingCurrency    string      `yaml:"billingCurrency" json:"billingCurrency"`
 	BillingPeriodEnd   metav1.Time `yaml:"billingPeriodEnd" json:"billingPeriodEnd"`
 	BillingPeriodStart metav1.Time `yaml:"billingPeriodStart" json:"billingPeriodStart"`
+	// +optional
+	CapacityReservationId string `yaml:"capacityReservationId" json:"capacityReservationId"`
+	// +kubebuilder:validation:Pattern=`(\b[Uu]used\b)|(\b[Uu]nused\b)`
+	// +kubebuilder:default=false
+	CapacityReservationStatus bool `yaml:"capacityReservationStatus" json:"capacityReservationStatus"`
 	// +kubebuilder:validation:Pattern=`(\b[Aa]djustment\b)|(\b[Pp]urchase\b)|(\b[Tt]ax\b)|(\b[Uu]sage\b)`
 	ChargeCategory string `yaml:"chargeCategory" json:"chargeCategory"`
 	// +kubebuilder:validation:Pattern=`(\b[Cc]orrection\b)`
@@ -159,7 +140,11 @@ type FocusSpec struct {
 	// +optional
 	CommitmentDiscountStatus string `yaml:"commitmentDiscountStatus" json:"commitmentDiscountStatus"`
 	// +optional
-	CommitmentDiscountName string            `yaml:"commitmentDiscountName" json:"commitmentDiscountName"`
+	CommitmentDiscountName string `yaml:"commitmentDiscountName" json:"commitmentDiscountName"`
+	// +optional
+	CommitmentDiscountQuantity resource.Quantity `yaml:"commitmentDiscountQuantity" json:"commitmentDiscountQuantity"`
+	// +optional
+	CommitmentDiscountUnit string            `yaml:"commitmentDiscountUnit" json:"commitmentDiscountUnit"`
 	ConsumedQuantity       resource.Quantity `yaml:"consumedQuantity" json:"consumedQuantity"`
 	ConsumedUnit           string            `yaml:"consumedUnit" json:"consumedUnit"`
 	ContractedCost         resource.Quantity `yaml:"contractedCost" json:"contractedCost"`
@@ -194,12 +179,16 @@ type FocusSpec struct {
 	// +optional
 	ResourceType string `yaml:"resourceType" json:"resourceType"`
 	// +kubebuilder:validation:Pattern=`(\bAI and Machine Learning\b)|(\bAnalytics\b)|(\bBusiness\b)|(\bCompute\b)|(\bDatabases\b)|(\bDeveloper Tools\b)|(\bMulticloud\b)|(\bIdentity\b)|(\bIntegration\b)|(\bInternet of Things\b)|(\bManagement and Governance\b)|(\bMedia\b)|(\bMigration\b)|(\bMobile\b)|(\bNetworking\b)|(\bSecurity\b)|(\bStorage\b)|(\bWeb\b)|(\bOther\b)`
-	// +optional
 	ServiceCategory string `yaml:"serviceCategory" json:"serviceCategory"`
 	// +optional
-	ServiceName string `yaml:"serviceName" json:"serviceName"`
+	ServiceName        string `yaml:"serviceName" json:"serviceName"`
+	ServiceSubcategory string `yaml:"serviceSubcategory" json:"serviceSubcategory"`
 	// +optional
 	SkuId string `yaml:"skuId" json:"skuId"`
+	// +optional
+	SkuMeter string `yaml:"skuMeter" json:"skuMeter"`
+	// +optional
+	SkuPriceDetails []TagsType `yaml:"skuPriceDetails" json:"skuPriceDetails"`
 	// +optional
 	SkuPriceId string `yaml:"skuPriceId" json:"skuPriceId"`
 	// +optional

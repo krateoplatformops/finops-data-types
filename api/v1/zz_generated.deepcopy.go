@@ -185,6 +185,7 @@ func (in *FocusSpec) DeepCopyInto(out *FocusSpec) {
 	in.BillingPeriodStart.DeepCopyInto(&out.BillingPeriodStart)
 	in.ChargePeriodEnd.DeepCopyInto(&out.ChargePeriodEnd)
 	in.ChargePeriodStart.DeepCopyInto(&out.ChargePeriodStart)
+	out.CommitmentDiscountQuantity = in.CommitmentDiscountQuantity.DeepCopy()
 	out.ConsumedQuantity = in.ConsumedQuantity.DeepCopy()
 	out.ContractedCost = in.ContractedCost.DeepCopy()
 	out.ContractedUnitCost = in.ContractedUnitCost.DeepCopy()
@@ -192,6 +193,11 @@ func (in *FocusSpec) DeepCopyInto(out *FocusSpec) {
 	out.ListCost = in.ListCost.DeepCopy()
 	out.ListUnitPrice = in.ListUnitPrice.DeepCopy()
 	out.PricingQuantity = in.PricingQuantity.DeepCopy()
+	if in.SkuPriceDetails != nil {
+		in, out := &in.SkuPriceDetails, &out.SkuPriceDetails
+		*out = make([]TagsType, len(*in))
+		copy(*out, *in)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]TagsType, len(*in))
