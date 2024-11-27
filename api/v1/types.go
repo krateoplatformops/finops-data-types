@@ -116,7 +116,8 @@ type FocusSpec struct {
 	// +optional
 	CapacityReservationId string `yaml:"capacityReservationId" json:"capacityReservationId"`
 	// +kubebuilder:validation:Pattern=`(\b[Uu]used\b)|(\b[Uu]nused\b)`
-	CapacityReservationStatus bool `yaml:"capacityReservationStatus" json:"capacityReservationStatus"`
+	// +optional
+	CapacityReservationStatus string `yaml:"capacityReservationStatus" json:"capacityReservationStatus"`
 	// +kubebuilder:validation:Pattern=`(\b[Aa]djustment\b)|(\b[Pp]urchase\b)|(\b[Tt]ax\b)|(\b[Uu]sage\b)`
 	ChargeCategory string `yaml:"chargeCategory" json:"chargeCategory"`
 	// +kubebuilder:validation:Pattern=`(\b[Cc]orrection\b)`
