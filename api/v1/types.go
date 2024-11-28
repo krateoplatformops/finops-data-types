@@ -103,100 +103,101 @@ type FocusConfigStatus struct {
 
 type FocusSpec struct {
 	// +optional
-	AvailabilityZone string            `yaml:"availabilityZone" json:"availabilityZone"`
+	AvailabilityZone string            `yaml:"availabilityZone,omitempty" json:"availabilityZone,omitempty"`
 	BilledCost       resource.Quantity `yaml:"billedCost" json:"billedCost"`
 	// +optional
-	BillingAccountId string `yaml:"billingAccountId" json:"billingAccountId"`
+	BillingAccountId string `yaml:"billingAccountId,omitempty" json:"billingAccountId,omitempty"`
 	// +optional
-	BillingAccountName string `yaml:"billingAccountName" json:"billingAccountName"`
+	BillingAccountName string `yaml:"billingAccountName,omitempty" json:"billingAccountName,omitempty"`
 	// +kubebuilder:validation:Pattern=`^[A-Z]{3}$`
 	BillingCurrency    string      `yaml:"billingCurrency" json:"billingCurrency"`
 	BillingPeriodEnd   metav1.Time `yaml:"billingPeriodEnd" json:"billingPeriodEnd"`
 	BillingPeriodStart metav1.Time `yaml:"billingPeriodStart" json:"billingPeriodStart"`
 	// +optional
-	CapacityReservationId string `yaml:"capacityReservationId" json:"capacityReservationId"`
+	CapacityReservationId string `yaml:"capacityReservationId,omitempty" json:"capacityReservationId,omitempty"`
 	// +kubebuilder:validation:Pattern=`(\b[Uu]used\b)|(\b[Uu]nused\b)`
 	// +optional
-	CapacityReservationStatus string `yaml:"capacityReservationStatus" json:"capacityReservationStatus"`
+	CapacityReservationStatus string `yaml:"capacityReservationStatus,omitempty" json:"capacityReservationStatus,omitempty"`
 	// +kubebuilder:validation:Pattern=`(\b[Aa]djustment\b)|(\b[Pp]urchase\b)|(\b[Tt]ax\b)|(\b[Uu]sage\b)`
 	ChargeCategory string `yaml:"chargeCategory" json:"chargeCategory"`
 	// +kubebuilder:validation:Pattern=`(\b[Cc]orrection\b)`
 	// +optional
-	ChargeClass       string `yaml:"chargeClass" json:"chargeClass"`
+	ChargeClass       string `yaml:"chargeClass,omitempty" json:"chargeClass,omitempty"`
 	ChargeDescription string `yaml:"chargeDescription" json:"chargeDescription"`
 	// +kubebuilder:validation:Pattern=`(\b[Oo]ne-{0,1}[Tt]ime\b)|(\b[Rr]ecurring\b)|(\b[Uu]sage-{0,1}[Bb]ased\b)`
 	// +optional
-	ChargeFrequency   string      `yaml:"chargeFrequency" json:"chargeFrequency"`
+	ChargeFrequency   string      `yaml:"chargeFrequency,omitempty" json:"chargeFrequency,omitempty"`
 	ChargePeriodEnd   metav1.Time `yaml:"chargePeriodEnd" json:"chargePeriodEnd"`
 	ChargePeriodStart metav1.Time `yaml:"chargePeriodStart" json:"chargePeriodStart"`
 	// +kubebuilder:validation:Pattern=`(\b[Ss]spend\b)|(\b[Uu]sage\b)`
 	// +optional
-	CommitmentDiscountCategory string `yaml:"commitmentDiscountCategory" json:"commitmentDiscountCategory"`
+	CommitmentDiscountCategory string `yaml:"commitmentDiscountCategory,omitempty" json:"commitmentDiscountCategory,omitempty"`
 	// +optional
-	CommitmentDiscountId string `yaml:"commitmentDiscoutId" json:"commitmentDiscoutId"`
+	CommitmentDiscountId string `yaml:"commitmentDiscoutId,omitempty" json:"commitmentDiscoutId,omitempty"`
 	// +optional
-	CommitmentDiscountType string `yaml:"commitmentDiscountType" json:"commitmentDiscountType"`
+	CommitmentDiscountType string `yaml:"commitmentDiscountType,omitempty" json:"commitmentDiscountType,omitempty"`
 	// +kubebuilder:validation:Pattern=`(\b[Uu]sed\b)|(\b[Uu]nused\b)`
 	// +optional
-	CommitmentDiscountStatus string `yaml:"commitmentDiscountStatus" json:"commitmentDiscountStatus"`
+	CommitmentDiscountStatus string `yaml:"commitmentDiscountStatus,omitempty" json:"commitmentDiscountStatus,omitempty"`
 	// +optional
-	CommitmentDiscountName string `yaml:"commitmentDiscountName" json:"commitmentDiscountName"`
+	CommitmentDiscountName string `yaml:"commitmentDiscountName,omitempty" json:"commitmentDiscountName,omitempty"`
 	// +optional
-	CommitmentDiscountQuantity resource.Quantity `yaml:"commitmentDiscountQuantity" json:"commitmentDiscountQuantity"`
+	CommitmentDiscountQuantity resource.Quantity `yaml:"commitmentDiscountQuantity,omitempty" json:"commitmentDiscountQuantity,omitempty"`
 	// +optional
-	CommitmentDiscountUnit string            `yaml:"commitmentDiscountUnit" json:"commitmentDiscountUnit"`
+	CommitmentDiscountUnit string            `yaml:"commitmentDiscountUnit,omitempty" json:"commitmentDiscountUnit,omitempty"`
 	ConsumedQuantity       resource.Quantity `yaml:"consumedQuantity" json:"consumedQuantity"`
 	ConsumedUnit           string            `yaml:"consumedUnit" json:"consumedUnit"`
 	ContractedCost         resource.Quantity `yaml:"contractedCost" json:"contractedCost"`
 	// +optional
-	ContractedUnitCost resource.Quantity `yaml:"contractedUnitCost" json:"contractedUnitCost"`
+	ContractedUnitCost resource.Quantity `yaml:"contractedUnitCost,omitempty" json:"contractedUnitCost,omitempty"`
 	// +optional
-	EffectiveCost     resource.Quantity `yaml:"effectiveCost" json:"effectiveCost"`
+	EffectiveCost     resource.Quantity `yaml:"effectiveCost,omitempty" json:"effectiveCost,omitempty"`
 	InvoiceIssuerName string            `yaml:"invoiceIssuerName" json:"invoiceIssuerName"`
 	// +optional
-	ListCost resource.Quantity `yaml:"listCost" json:"listCost"`
+	ListCost resource.Quantity `yaml:"listCost,omitempty" json:"listCost,omitempty"`
 	// +optional
-	ListUnitPrice resource.Quantity `yaml:"listUnitPrice" json:"listUnitPrice"`
+	ListUnitPrice resource.Quantity `yaml:"listUnitPrice,omitempty" json:"listUnitPrice,omitempty"`
 	// +kubebuilder:validation:Pattern=`(\b[Oo]n-{0,1}[Dd]emand\b)|(\b[Dd]ynamic\b)|(\b[Cc]ommitment-{0,1}[Bb]ased\b)|(\b[Oo]ther\b)`
 	// +optional
-	PricingCategory string `yaml:"pricingCategory" json:"pricingCategory"`
+	PricingCategory string `yaml:"pricingCategory,omitempty" json:"pricingCategory,omitempty"`
 	// +optional
-	PricingQuantity resource.Quantity `yaml:"pricingQuantity" json:"pricingQuantity"`
+	PricingQuantity resource.Quantity `yaml:"pricingQuantity,omitempty" json:"pricingQuantity,omitempty"`
 	// +optional
-	PricingUnit string `yaml:"pricingUnit" json:"pricingUnit"`
+	PricingUnit string `yaml:"pricingUnit,omitempty" json:"pricingUnit,omitempty"`
 	// +optional
-	ProviderName string `yaml:"providerName" json:"providerName"`
+	ProviderName string `yaml:"providerName,omitempty" json:"providerName,omitempty"`
 	// +optional
-	PublisherName string `yaml:"publisherName" json:"publisherName"`
+	PublisherName string `yaml:"publisherName,omitempty" json:"publisherName,omitempty"`
 	// +optional
-	RegionId string `yaml:"regionId" json:"regionId"`
+	RegionId string `yaml:"regionId,omitempty" json:"regionId,omitempty"`
 	// +optional
-	RegionName string `yaml:"regionName" json:"regionName"`
+	RegionName string `yaml:"regionName,omitempty" json:"regionName,omitempty"`
 	// +optional
-	ResourceId string `yaml:"resourceId" json:"resourceId"`
+	ResourceId string `yaml:"resourceId,omitempty" json:"resourceId,omitempty"`
 	// +optional
-	ResourceName string `yaml:"resourceName" json:"resourceName"`
+	ResourceName string `yaml:"resourceName,omitempty" json:"resourceName,omitempty"`
 	// +optional
-	ResourceType string `yaml:"resourceType" json:"resourceType"`
+	ResourceType string `yaml:"resourceType,omitempty" json:"resourceType,omitempty"`
 	// +kubebuilder:validation:Pattern=`(\bAI and Machine Learning\b)|(\bAnalytics\b)|(\bBusiness\b)|(\bCompute\b)|(\bDatabases\b)|(\bDeveloper Tools\b)|(\bMulticloud\b)|(\bIdentity\b)|(\bIntegration\b)|(\bInternet of Things\b)|(\bManagement and Governance\b)|(\bMedia\b)|(\bMigration\b)|(\bMobile\b)|(\bNetworking\b)|(\bSecurity\b)|(\bStorage\b)|(\bWeb\b)|(\bOther\b)`
 	ServiceCategory string `yaml:"serviceCategory" json:"serviceCategory"`
 	// +optional
-	ServiceName        string `yaml:"serviceName" json:"serviceName"`
-	ServiceSubcategory string `yaml:"serviceSubcategory" json:"serviceSubcategory"`
+	ServiceName string `yaml:"serviceName,omitempty" json:"serviceName,omitempty"`
 	// +optional
-	SkuId string `yaml:"skuId" json:"skuId"`
+	ServiceSubcategory string `yaml:"serviceSubcategory,omitempty" json:"serviceSubcategory,omitempty"`
 	// +optional
-	SkuMeter string `yaml:"skuMeter" json:"skuMeter"`
+	SkuId string `yaml:"skuId,omitempty" json:"skuId,omitempty"`
 	// +optional
-	SkuPriceDetails []TagsType `yaml:"skuPriceDetails" json:"skuPriceDetails"`
+	SkuMeter string `yaml:"skuMeter,omitempty" json:"skuMeter,omitempty"`
 	// +optional
-	SkuPriceId string `yaml:"skuPriceId" json:"skuPriceId"`
+	SkuPriceDetails []TagsType `yaml:"skuPriceDetails,omitempty" json:"skuPriceDetails,omitempty"`
 	// +optional
-	SubAccountId string `yaml:"subAccountId" json:"subAccountId"`
+	SkuPriceId string `yaml:"skuPriceId,omitempty" json:"skuPriceId,omitempty"`
 	// +optional
-	SubAccountName string `yaml:"subAccountName" json:"subAccountName"`
+	SubAccountId string `yaml:"subAccountId,omitempty" json:"subAccountId,omitempty"`
 	// +optional
-	Tags []TagsType `yaml:"tags" json:"tags"`
+	SubAccountName string `yaml:"subAccountName,omitempty" json:"subAccountName,omitempty"`
+	// +optional
+	Tags []TagsType `yaml:"tags,omitempty" json:"tags,omitempty"`
 }
 
 type TagsType struct {
