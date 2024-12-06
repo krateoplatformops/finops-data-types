@@ -32,12 +32,14 @@ type ExporterScraperConfigStatus struct {
 }
 
 type ExporterConfigSpec struct {
+	// +optional
 	Provider ObjectRef `yaml:"provider" json:"provider"`
 	Url      string    `yaml:"url" json:"url"`
 	// +optional
 	UrlParsed             string `yaml:"urlParsed" json:"urlParsed,omitempty"`
 	RequireAuthentication bool   `yaml:"requireAuthentication" json:"requireAuthentication"`
 	// +kubebuilder:validation:Pattern=`^(\bcert-file\b)|(\bbearer-token\b)$`
+	// +optional
 	AuthenticationMethod string `yaml:"authenticationMethod" json:"authenticationMethod"`
 	// +optional
 	BearerToken SecretKeySelector `yaml:"bearerToken" json:"bearerToken"`
@@ -147,7 +149,8 @@ type FocusSpec struct {
 	CommitmentDiscountUnit string            `yaml:"commitmentDiscountUnit,omitempty" json:"commitmentDiscountUnit,omitempty"`
 	ConsumedQuantity       resource.Quantity `yaml:"consumedQuantity" json:"consumedQuantity"`
 	ConsumedUnit           string            `yaml:"consumedUnit" json:"consumedUnit"`
-	ContractedCost         resource.Quantity `yaml:"contractedCost" json:"contractedCost"`
+	// +optional
+	ContractedCost resource.Quantity `yaml:"contractedCost" json:"contractedCost"`
 	// +optional
 	ContractedUnitCost resource.Quantity `yaml:"contractedUnitCost,omitempty" json:"contractedUnitCost,omitempty"`
 	// +optional
