@@ -46,9 +46,10 @@ type ExporterConfigSpec struct {
 	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
 	// +kubebuilder:default=cost
 	// +optional
-	MetricType           string            `yaml:"metricType" json:"metricType"`
-	PollingIntervalHours int               `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
-	AdditionalVariables  map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
+	MetricType           string `yaml:"metricType" json:"metricType"`
+	PollingIntervalHours int    `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
+	// +optional
+	AdditionalVariables map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
 }
 
 type ScraperConfig struct {
