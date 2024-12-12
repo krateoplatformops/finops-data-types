@@ -31,6 +31,7 @@ type ExporterScraperConfigStatus struct {
 	Service        corev1.ObjectReference `json:"services,omitempty"`
 }
 
+// +kubebuilder:validation:XValidation:rule="!self.requireAuthentication || self.authenticationMethod != ''",message="AuthenticationMethod must not be empty when RequireAuthentication is true."
 type ExporterConfigSpec struct {
 	// +optional
 	Provider ObjectRef `yaml:"provider" json:"provider"`
@@ -38,7 +39,7 @@ type ExporterConfigSpec struct {
 	// +optional
 	UrlParsed             string `yaml:"urlParsed" json:"urlParsed,omitempty"`
 	RequireAuthentication bool   `yaml:"requireAuthentication" json:"requireAuthentication"`
-	// +kubebuilder:validation:Pattern=`^(\bcert-file\b)|(\bbearer-token\b)$`
+	// +kubebuilder:validation:Enum=cert-file;bearer-token;""
 	// +optional
 	AuthenticationMethod string `yaml:"authenticationMethod" json:"authenticationMethod"`
 	// +optional
