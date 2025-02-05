@@ -31,19 +31,10 @@ type ExporterScraperConfigStatus struct {
 	Service        corev1.ObjectReference `json:"services,omitempty"`
 }
 
-// +kubebuilder:validation:XValidation:rule="!self.requireAuthentication || self.authenticationMethod != ''",message="AuthenticationMethod must not be empty when RequireAuthentication is true."
 type ExporterConfigSpec struct {
 	// +optional
 	Provider ObjectRef `yaml:"provider" json:"provider"`
-	Url      string    `yaml:"url" json:"url"`
-	// +optional
-	UrlParsed             string `yaml:"urlParsed" json:"urlParsed,omitempty"`
-	RequireAuthentication bool   `yaml:"requireAuthentication" json:"requireAuthentication"`
-	// +kubebuilder:validation:Enum=cert-file;bearer-token;""
-	// +optional
-	AuthenticationMethod string `yaml:"authenticationMethod" json:"authenticationMethod"`
-	// +optional
-	BearerToken SecretKeySelector `yaml:"bearerToken" json:"bearerToken"`
+	API      API       `yaml:"api" json:"api"`
 	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
 	// +kubebuilder:default=cost
 	// +optional
@@ -65,7 +56,7 @@ type ScraperConfigSpec struct {
 	TableName            string `yaml:"tableName" json:"tableName"`
 	PollingIntervalHours int    `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
 	// +optional
-	Url string `yaml:"url" json:"url,omitempty"`
+	API API `yaml:"api" json:"api"`
 	// +kubebuilder:default=cost
 	// +optional
 	MetricType               string    `yaml:"metricType" json:"metricType"`
@@ -225,4 +216,23 @@ type SecretKeySelector struct {
 
 	// The key to select.
 	Key string `json:"key"`
+}
+
+// API represents a request to an HTTP service
+type API struct {
+	// Name is a (unique) identifier
+	Name string `json:"name"`
+	// Path is the request URI path
+	Path *string `json:"path,omitempty"`
+	// Verb is the request method (GET if omitted)
+	Verb *string `json:"verb,omitempty"`
+	//+listType=atomic
+	// Headers is an array of custom request headers
+	Headers []string `json:"headers,omitempty"`
+	// Payload is the request body
+	Payload *string `json:"payload,omitempty"`
+	// EndpointRef a reference to an Endpoint
+	EndpointRef *ObjectRef `json:"endpointRef,omitempty"`
+	// DependOn reference to the identifier (name) of another API on which this depends
+	DependOn *string `json:"dependOn,omitempty"`
 }
