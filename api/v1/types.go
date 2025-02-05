@@ -34,7 +34,7 @@ type ExporterScraperConfigStatus struct {
 type ExporterConfigSpec struct {
 	// +optional
 	Provider ObjectRef `yaml:"provider" json:"provider"`
-	API      API       `yaml:"api" json:"api"`
+	API      API       `yaml:"api" json:"api,omitempty"`
 	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
 	// +kubebuilder:default=cost
 	// +optional
@@ -56,7 +56,7 @@ type ScraperConfigSpec struct {
 	TableName            string `yaml:"tableName" json:"tableName"`
 	PollingIntervalHours int    `yaml:"pollingIntervalHours" json:"pollingIntervalHours"`
 	// +optional
-	API API `yaml:"api" json:"api"`
+	API API `yaml:"api" json:"api,omitempty"`
 	// +kubebuilder:default=cost
 	// +optional
 	MetricType               string    `yaml:"metricType" json:"metricType"`
@@ -220,19 +220,15 @@ type SecretKeySelector struct {
 
 // API represents a request to an HTTP service
 type API struct {
-	// Name is a (unique) identifier
-	Name string `json:"name"`
 	// Path is the request URI path
-	Path *string `json:"path,omitempty"`
+	Path string `json:"path,omitempty"`
 	// Verb is the request method (GET if omitted)
-	Verb *string `json:"verb,omitempty"`
+	Verb string `json:"verb,omitempty"`
 	//+listType=atomic
 	// Headers is an array of custom request headers
 	Headers []string `json:"headers,omitempty"`
 	// Payload is the request body
-	Payload *string `json:"payload,omitempty"`
+	Payload string `json:"payload,omitempty"`
 	// EndpointRef a reference to an Endpoint
 	EndpointRef *ObjectRef `json:"endpointRef,omitempty"`
-	// DependOn reference to the identifier (name) of another API on which this depends
-	DependOn *string `json:"dependOn,omitempty"`
 }
