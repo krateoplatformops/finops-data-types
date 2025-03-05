@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+// +kubebuilder:object:root=true
 type ExporterScraperConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -45,6 +46,7 @@ type ExporterConfigSpec struct {
 	AdditionalVariables map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
 }
 
+// +kubebuilder:object:root=true
 type ScraperConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -70,6 +72,7 @@ type ScraperConfigStatus struct {
 	ConfigMap              corev1.ObjectReference `json:"configMaps,omitempty"`
 }
 
+// +kubebuilder:object:root=true
 type FocusConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
