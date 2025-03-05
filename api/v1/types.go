@@ -29,6 +29,7 @@ type ExporterScraperConfigStatus struct {
 	ActiveExporter corev1.ObjectReference `json:"active,omitempty"`
 	ConfigMap      corev1.ObjectReference `json:"configMaps,omitempty"`
 	Service        corev1.ObjectReference `json:"services,omitempty"`
+	ScraperConfig  corev1.ObjectReference `json:"scraperConfig,omitempty"`
 }
 
 type ExporterConfigSpec struct {
