@@ -2,8 +2,6 @@
 package config
 
 import (
-	"time"
-
 	prv1 "github.com/krateoplatformops/provider-runtime/apis/common/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
@@ -42,8 +40,10 @@ type ExporterConfigSpec struct {
 	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
 	// +kubebuilder:default=cost
 	// +optional
-	MetricType      string        `yaml:"metricType" json:"metricType"`
-	PollingInterval time.Duration `yaml:"pollingInterval" json:"pollingInterval"`
+	MetricType string `yaml:"metricType" json:"metricType"`
+	// +kubebuilder:validation:Type=string
+	// +kubebuilder:validation:Format=duration
+	PollingInterval metav1.Duration `yaml:"pollingInterval" json:"pollingInterval"`
 	// +optional
 	AdditionalVariables map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
 }
@@ -58,8 +58,10 @@ type ScraperConfig struct {
 }
 
 type ScraperConfigSpec struct {
-	TableName       string        `yaml:"tableName" json:"tableName"`
-	PollingInterval time.Duration `yaml:"pollingInterval" json:"pollingInterval"`
+	TableName string `yaml:"tableName" json:"tableName"`
+	// +kubebuilder:validation:Type=string
+	// +kubebuilder:validation:Format=duration
+	PollingInterval metav1.Duration `yaml:"pollingInterval" json:"pollingInterval"`
 	// +optional
 	API API `yaml:"api" json:"api,omitempty"`
 	// +kubebuilder:default=cost
