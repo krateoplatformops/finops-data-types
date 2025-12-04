@@ -71,9 +71,12 @@ type ScraperConfigSpec struct {
 	PollingInterval metav1.Duration `yaml:"pollingInterval" json:"pollingInterval"`
 	// +optional
 	API API `yaml:"api" json:"api,omitempty"`
+	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)|(\b[gG]eneric\b)$`
 	// +kubebuilder:default=cost
 	// +optional
-	MetricType               string    `yaml:"metricType" json:"metricType"`
+	MetricType string `yaml:"metricType" json:"metricType"`
+	// +optional
+	Generic                  *Generic  `yaml:"generic" json:"generic,omitempty"`
 	ScraperDatabaseConfigRef ObjectRef `yaml:"scraperDatabaseConfigRef" json:"scraperDatabaseConfigRef"`
 }
 

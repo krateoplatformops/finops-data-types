@@ -327,6 +327,11 @@ func (in *ScraperConfigSpec) DeepCopyInto(out *ScraperConfigSpec) {
 	*out = *in
 	out.PollingInterval = in.PollingInterval
 	in.API.DeepCopyInto(&out.API)
+	if in.Generic != nil {
+		in, out := &in.Generic, &out.Generic
+		*out = new(Generic)
+		**out = **in
+	}
 	out.ScraperDatabaseConfigRef = in.ScraperDatabaseConfigRef
 }
 
