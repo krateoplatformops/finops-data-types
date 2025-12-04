@@ -37,15 +37,22 @@ type ExporterConfigSpec struct {
 	// +optional
 	Provider ObjectRef `yaml:"provider" json:"provider"`
 	API      API       `yaml:"api" json:"api,omitempty"`
-	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)$`
+	// +kubebuilder:validation:Pattern=`^(\b[Cc]ost\b)|(\b[Rr]esource\b)|(\b[gG]eneric\b)$`
 	// +kubebuilder:default=cost
 	// +optional
 	MetricType string `yaml:"metricType" json:"metricType"`
+	// +optional
+	Generic *Generic `yaml:"generic" json:"generic,omitempty"`
 	// +kubebuilder:validation:Type=string
 	// +kubebuilder:validation:Format=duration
 	PollingInterval metav1.Duration `yaml:"pollingInterval" json:"pollingInterval"`
 	// +optional
 	AdditionalVariables map[string]string `yaml:"additionalVariables" json:"additionalVariables"`
+}
+
+type Generic struct {
+	ValueColumnIndex int    `yaml:"valueColumnIndex" json:"valueColumnIndex"`
+	MetricName       string `yaml:"metricName" json:"metricName"`
 }
 
 // +kubebuilder:object:root=true
